@@ -12,8 +12,7 @@ module.exports = {
         'app-black': '#000',
         'app-blue':'#1577EA',
         'app-gray':'#A6A6A6',
-        'app-green':'#50E3A4',
-        
+        'app-light-blue':'#7BB4F8',
 
       },
     },

@@ -7,8 +7,66 @@ body{
   padding: 0;
  box-sizing: border-box;
  background-color: rgb(240 239 233);
+ background: rgb(21,119,234);
+ background: linear-gradient(145deg, rgba(21,119,234,1) 0%, rgba(174,211,255,1) 100%);
 }
 
 *{
   font-family: 'Poppins';
 }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes colorChange {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+@keyframes slideIn {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.to-start-planing {
+  display: inline-block;
+  background: linear-gradient(90deg, #1577EA, #064999, #395a82, #1577EA, #1577EA, #164e91);
+  background-size: 600% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: colorChange 10s linear infinite;
+}
+
+#addTodoForm{
+  animation: slideIn 0.3s ease-out;
+}
+.login {
+  animation: fadeIn 1.5s;
+  transition: all .5s ease-in-out;
+}
+
+.todolist {
+  animation: fadeIn 1.5s;
+  transition: all .5s ease-in-out;
+}
+
+#newTodo::placeholder {
+  color: #404040;
+  font-style: italic;
+  opacity: 1; /* Firefox */
+}
+#newTodo::-ms-input-placeholder { /* Edge 12 -18 */
+  color: #505050;
+  font-style: italic;
+}
+
+
