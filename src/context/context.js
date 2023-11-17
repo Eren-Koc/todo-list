@@ -14,8 +14,7 @@ const [todos,setTodos] = useState([]);
           let usersArray = QuerySnapshot.docs.map((doc) => ({
             ...doc.data(),
             id: doc.id,
-          }));
-          console.log("usersARRAY",usersArray);
+          }));          
           setAllUsers(usersArray);
         });
         return () => unsub();
@@ -28,7 +27,6 @@ const [todos,setTodos] = useState([]);
             ...doc.data(),
             id: doc.id,
           }));
-          console.log("todosArray",todosArray);
           setTodos(todosArray);
         });
         return () => unsub();
