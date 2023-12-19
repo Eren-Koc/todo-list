@@ -15,7 +15,7 @@ const [todos,setTodos] = useState([]);
             ...doc.data(),
             id: doc.id,
           }));
-          console.log("usersARRAY",usersArray);
+         
           setAllUsers(usersArray);
         });
         return () => unsub();
@@ -28,7 +28,7 @@ const [todos,setTodos] = useState([]);
             ...doc.data(),
             id: doc.id,
           }));
-          console.log("todosArray",todosArray);
+          
           setTodos(todosArray);
         });
         return () => unsub();
@@ -44,6 +44,29 @@ const [todos,setTodos] = useState([]);
         });
     }
 
+    const Register=async(username,password)=>{
+
+      const foundUser = allUsers.find((user) => user.username == username);
+      let isRegisterSuccsess=false;
+      if(!foundUser){
+          await addDoc(collection(db,"users"),{
+              username:username,
+              password:password,
+              userid: allUsers.length,
+
+          });
+          isRegisterSuccsess=true;
+      }
+
+      return new Promise((resolve, reject) => {
+        if (isRegisterSuccsess) {
+          resolve(true);
+        } else {
+          reject(false);
+        }
+      });
+    }
+
     const changeTodoStatus = async (todo) => {
       await updateDoc(doc(db,"todos",todo.id), {todo_completed:!todo.todo_completed});
       };
@@ -54,7 +77,7 @@ const [todos,setTodos] = useState([]);
         await deleteDoc(doc(db,"todos", todo.id));
     }
 
-    const contextValue={user,setUser,allUsers,todos,setTodos,addTodo,changeTodoStatus,deleteTodo,changeTodoTitle};
+    const contextValue={user,setUser,allUsers,todos,setTodos,addTodo,changeTodoStatus,deleteTodo,changeTodoTitle,Register};
 
     return (
         <Context.Provider value={contextValue}>{props.children}</Context.Provider>
