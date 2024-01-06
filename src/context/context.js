@@ -44,14 +44,33 @@ const [todos,setTodos] = useState([]);
         });
     }
 
+    function generateUniqueId() {  
+      const uniqueId = Math.floor(Math.random() * 100000) + 1;
+
+      
+      if (!isIdUnique(uniqueId)) {
+        return generateUniqueId();
+      }
+      return uniqueId;
+    }
+    
+    function isIdUnique(id) {
+      const exists = allUsers.some((user) => user.userid === id);
+      return !exists;
+    }
+
     const Register=async(username,password)=>{
       const foundUser = allUsers.find((user) => user.username == username);
       let isRegisterSuccsess=false;
       if(!foundUser){
+
+
+        const userid=generateUniqueId();
+
           await addDoc(collection(db,"users"),{
               username:username,
               password:password,
-              userid: allUsers.length,
+              userid: userid,
 
           });
           isRegisterSuccsess=true;
