@@ -63,7 +63,7 @@ const Todo = ({props}) => {
     
   return (
     <div style={props.todo_completed ? props.category=="work" ? WorkCompeletedStyle : PersonalCompeletedStyle : DefaultStyle } className='todo my-1 py-3 duration-500 ease-in-out px-2 w-full justify-between border-y border-app-border items-center flex'>
-        <input type="text" value={todoTitle} onKeyDown={handleKeyDown} onBlur={handleBlur} onChange={handleChange} className='outline-none bg-transparent flex-1' />       
+        <textarea type="text" value={todoTitle} onKeyDown={handleKeyDown} rows={todoTitle.length/35 > 1 ? todoTitle.length/35 : 1} onBlur={handleBlur} onChange={handleChange} contenteditable="true" className='resize-none form-sizi overflow-hidden min-h-fit outline-none bg-transparent flex-1' />       
     <span className='flex justify-center items-center flex-row ml-2 gap-2'>
     {props.todo_completed ? <FaRegCircleCheck onClick={()=>{changeTodoStatus(props)}} className='cursor-pointer'/> 
     : <FaRegCircle onClick={()=>{changeTodoStatus(props)}} className='cursor-pointer'/>}
