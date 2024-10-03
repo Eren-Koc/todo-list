@@ -20,7 +20,15 @@ const Todo = ({props}) => {
   const UrlDetection=()=>{
 
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const foundUrls = todoTitle.match(urlRegex);
+    let newTitle=todoTitle;
+   
+    if(urlData.length>0){
+      const urls = urlData.map(data => data.url).join(' ');
+      newTitle = todoTitle +" "+ urls;
+    }
+    
+
+    const foundUrls = newTitle.match(urlRegex);
     if (foundUrls) {
       const urlObjects = foundUrls.map((url) => {
 
@@ -51,8 +59,6 @@ const Todo = ({props}) => {
     const urls = updateData.map(data => data.url).join(' ');
     const lastTitle = todoTitle +" "+ urls;
     changeTodoTitle(props,lastTitle);
-
-
   }
  
  
@@ -162,7 +168,7 @@ const Todo = ({props}) => {
         </div>
         ) 
       })}
-      <div className=''></div>
+ 
     </div>
   ) : null}
   </div>
