@@ -41,6 +41,7 @@ const [todos,setTodos] = useState([]);
             category:categoryName,
             todo_title:todoTitle,
             todo_completed:false,
+            createdAt: new Date(),
         });
     }
 
@@ -85,10 +86,17 @@ const [todos,setTodos] = useState([]);
     }
 
     const changeTodoStatus = async (todo) => {
-      await updateDoc(doc(db,"todos",todo.id), {todo_completed:!todo.todo_completed});
+      await updateDoc(doc(db,"todos",todo.id), {
+        todo_completed:!todo.todo_completed,
+        createdAt: new Date(),
+      });
       };
     const changeTodoTitle = async (todo,newTitle) => {
-      await updateDoc(doc(db,"todos",todo.id), {todo_title:newTitle});
+      
+      await updateDoc(doc(db,"todos",todo.id), {
+        todo_title:newTitle,
+        createdAt: new Date(),
+      });
       };      
     const deleteTodo = async(todo)=>{
         await deleteDoc(doc(db,"todos", todo.id));
