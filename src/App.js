@@ -2,7 +2,7 @@ import Login from './pages/Login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ContextProvider } from './context/context';
 import Home from './pages/Home';
-
+import './index.css';
 
 function App() {
   return (

@@ -5,11 +5,11 @@ import { IoMdClose  } from "react-icons/io";
 import { BiSolidEditAlt } from "react-icons/bi";
 import Swal from 'sweetalert2';
 import { FaChevronDown,FaChevronUp  } from "react-icons/fa";
+import '../index.css';
 const Todo = ({props}) => {
   const {changeTodoStatus,deleteTodo,changeTodoTitle} = useContext(Context);
   const [todoTitle, setTodoTitle] = useState(props.todo_title);
   const [showAll,setShowAll] = useState(false);
-
   const [urlData, setUrlData] = useState([]);
 
 
@@ -100,23 +100,8 @@ const Todo = ({props}) => {
   };
 
 
-    const WorkBorderStyle ={
-        borderColor:"#1577EA",
-      }
-    const PersonalBorderStyle ={
-        borderColor:'#7BB4F8',
-    }
-    const WorkCompeletedStyle ={
-        backgroundColor:'#1577EA',
-        textDecoration:"line-through",
-    }
-    const PersonalCompeletedStyle ={
-        backgroundColor:'#7BB4F8',
-        textDecoration:"line-through",
-    }
-    const DefaultStyle ={
-        backgroundColor:'#FFF',
-    }
+    const NavigateBorderColor = props.category === "work" ? "border-app-blue" : "border-app-light-blue";
+    const todoStyling = props.todo_completed ? props.category === "work" ? "bg-app-blue line-through" : "bg-app-light-blue line-through" : null;
     
   const deleteTodoConfirm=(todo)=>{
       Swal.fire({
@@ -139,8 +124,8 @@ const Todo = ({props}) => {
     
   return (
     <>
-    <div className='flex flex-col '>
-    <div style={props.todo_completed ? props.category=="work" ? WorkCompeletedStyle : PersonalCompeletedStyle : DefaultStyle } className='todo my-1 py-3 duration-500 ease-in-out px-2 w-full justify-between border-y border-app-border items-center flex'>
+    <div className='flex flex-col text-app-black bg-app-white '>
+    <div  className={` ${todoStyling} todo my-1 py-3 duration-500 ease-in-out px-2 w-full justify-between border-y border-app-border items-center flex`}>
         <textarea type="text" value={todoTitle} onKeyDown={handleKeyDown} rows={showAll ? todoTitle.length/35 > 1 ? todoTitle.length/35 : 1 : 1} onBlur={handleBlur} onChange={handleChange} className='resize-none form-sizi overflow-hidden min-h-fit outline-none bg-transparent flex-1' />       
     <span className='flex justify-center items-center flex-row ml-2 gap-2'>
     {todoTitle.length>34 || urlData.length>0 ?
@@ -164,7 +149,7 @@ const Todo = ({props}) => {
         return (
         <div key={"navigator-"+props.todo_id+i}  className='flex gap-1 h-fit justify-center items-center'>
         <IoMdClose onClick={()=>{removeNavigation(eachData.url)}} className='cursor-pointer hover:text-blue-600'/>
-        <a  target='_blank' style={ props.category=="work" ? WorkBorderStyle : PersonalBorderStyle } className="border-[1px]  px-2 py-1 rounded-md" href={eachData.url}>{eachData.urlName}</a>
+        <a  target='_blank' className={`border-[1px] ${NavigateBorderColor}  px-2 py-1 rounded-md`} href={eachData.url}>{eachData.urlName}</a>
         </div>
         ) 
       })}
